@@ -17,9 +17,10 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 80, host: 5000
   config.vm.network :forwarded_port, guest: 3306, host: 5001
   
-  #Ignore Default share
+  # Default share
   config.vm.synced_folder ".", "/vagrant", id: "vagrant-root"
   
+  # Sync www to /var/www/html with special owner and group
   config.vm.synced_folder "./www", "/var/www/html", id: "vagrant-www",
     owner: "www-data",
     group: "www-data",
