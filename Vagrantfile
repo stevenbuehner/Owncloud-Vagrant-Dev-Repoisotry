@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "./www", "/var/www/html", id: "vagrant-www",
     owner: "www-data",
     group: "www-data",
-    mount_options: ["dmode=776,fmode=664"]
+    mount_options: ["dmode=770,fmode=664"]
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
