@@ -5,10 +5,15 @@ MYSQL_DEFAULT_DB=oc_autotest
 MYSQL_DEFAULT_USER=oc_autotest
 OWNCLOUD_BRANCH=stable9
 WEBSERVER_ROOT=/var/www/html
-apt-get update
 
 # Install tools
+apt-get update
 apt-get -q -y install wget
+
+# Setup PHP 5.6 (Default php 5.5)
+add-apt-repository ppa:ondrej/php5-5.6
+apt-get update
+# apt-get install python-software-properties # on error only
 
 # Install Mysql silently
 export DEBIAN_FRONTEND=noninteractive
@@ -22,11 +27,6 @@ sudo service mysql restart
 
 # Setup Apache with phpmodules
 apt-get install -y apache2 
-
-# Setup PHP 5.6 (Default php 5.5)
-add-apt-repository ppa:ondrej/php5-5.6
-apt-get update
-# apt-get install python-software-properties # on error only
 
 # Install php and modules
 apt-get install -y php5 
