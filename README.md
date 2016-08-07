@@ -9,7 +9,6 @@ I wanted to see exactly what is installed on the vm and therefore created my own
 - /var/www/html has user:group permissions of www-data:www-data
 - all the data can be modified on the host in "./www" or the vm in "/vagrant/www"
 - php 5.6, phpunit, owncloud dev-tools will be installed automatically
-- 
 
 # Default Usernames / Passwords
 - SQL-DB: oc_autotest
