@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 MYSQL_ADMIN_PASS=adminpass
-MYSQL_DEFAULT_DB=owncloud
+MYSQL_DEFAULT_DB=oc_autotest
+MYSQL_DEFAULT_USER=oc_autotest
 OWNCLOUD_BRANCH=stable9
 WEBSERVER_ROOT=/var/www/html
 apt-get update
@@ -18,9 +19,6 @@ mysqladmin -u root password $MYSQL_ADMIN_PASS
 sed -i 's/bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/g' /etc/mysql/my.cnf
 mysql -u root -p$MYSQL_ADMIN_PASS -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '$MYSQL_ADMIN_PASS' WITH GRANT OPTION; FLUSH PRIVILEGES;"
 sudo service mysql restart
-
-# Create default Mysql-DB
-mysql -u root -p$MYSQL_ADMIN_PASS -e "CREATE DATABASE $MYSQL_DEFAULT_DB"
 
 # Setup Apache with phpmodules
 apt-get install -y apache2 
@@ -61,9 +59,9 @@ chown -R www-data.www-data $WEBSERVER_ROOT
 service apache2 restart
 
 # set up mysql / Travis Default-DB
-mysql -u root -p$MYSQL_ADMIN_PASS -e 'create database oc_autotest;'
-mysql -u root -p$MYSQL_ADMIN_PASS -e "CREATE USER 'oc_autotest'@'localhost';"
-mysql -u root -p$MYSQL_ADMIN_PASS -e "grant all on oc_autotest.* to 'oc_autotest'@'localhost';"
+mysql -u root -p$MYSQL_ADMIN_PASS -e "CREATE DATABASE $MYSQL_DEFAULT_DB"
+mysql -u root -p$MYSQL_ADMIN_PASS -e "CREATE USER '$MYSQL_DEFAULT_USER'@'localhost';"
+mysql -u root -p$MYSQL_ADMIN_PASS -e "grant all on $MYSQL_DEFAULT_USER.* to '$MYSQL_DEFAULT_DB'@'localhost';"
 cd $WEBSERVER_ROOT
 ocdev ci mysql
 
