@@ -17,3 +17,10 @@ I wanted to see exactly what is installed on the vm and therefore created my own
 - MySql "root" Password: adminpass
 - Owncloud-Username: admin
 - Owncloud "admin" Password: admin
+
+# Often needed commands
+vagrant up
+vagrant halt
+vagrant destroy
+vagrant ssh
+vagrant ssh -c "sudo tail -f /var/log/apache2/error.log"

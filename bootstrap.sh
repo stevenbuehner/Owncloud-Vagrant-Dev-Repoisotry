@@ -28,6 +28,11 @@ sudo service mysql restart
 # Setup Apache with phpmodules
 apt-get install -y apache2 
 
+# Make apache2-log dir readable
+# Feature: Read the Apache-Error-Logfile directly from host via: vagrant ssh -c "sudo tail -f /var/log/apache2/error.log"
+mkdir -p /var/log/apache2
+chmod o+x,o+r /var/log/apache2
+
 # Install php and modules
 apt-get install -y php5 
 apt-get install -y php5-imagick mysql-server php5-mysql php5-mcrypt php5-curl php5-imap php5-gd php5-sqlite
