@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, path: "vagrant_scripts/install_composer.sh"
   config.vm.provision :shell, path: "vagrant_scripts/install_phpunit.sh"
   config.vm.provision :shell, path: "vagrant_scripts/install_owncloud.sh", env: {"MYSQL_ROOT_PASS" => "adminpass", "OWNCLOUD_BRANCH" => "stable9"}
-  config.vm.provision :shell, path: "vagrant_scripts/setup_terminal_startdir.sh", privileged: false, env: {"START_DIR" => "/vagrant/www"}  
+  config.vm.provision :shell, path: "vagrant_scripts/setup_terminal_startdir.sh", privileged: false, env: {"START_DIR" => "/vagrant/www/apps/knowledgebase"}  
   #config.vm.provision :shell, path: "bootstrap.sh"
   config.vm.network :forwarded_port, guest: 80, host: 5000
   config.vm.network :forwarded_port, guest: 3306, host: 5001
