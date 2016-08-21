@@ -21,7 +21,8 @@ ocdev --version
 # Owncloud base-setup
 mkdir -p /tmp/owncloud
 ocdev setup core --dir /tmp/owncloud/ --branch $OWNCLOUD_BRANCH --no-history
-rsync -a /tmp/owncloud/ $WEBSERVER_ROOT/
+# Only sync changed files
+rsync -arc /tmp/owncloud/ $WEBSERVER_ROOT/
 rm -rf /tmp/owncloud
 chown -R www-data.www-data $WEBSERVER_ROOT
 # chmod 770 $WEBSERVER_ROOT/data
