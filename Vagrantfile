@@ -27,11 +27,17 @@ Vagrant.configure("2") do |config|
   # Default share
   config.vm.synced_folder ".", "/vagrant", id: "vagrant-root"
   
+    # Sync www to /var/www/html with special owner and group
+  config.vm.synced_folder "./data", "/var/www/data", id: "vagrant-data",
+    owner: "vagrant",
+    group: "www-data",
+    mount_options: ["dmode=770,fmode=660"]
+  
   # Sync www to /var/www/html with special owner and group
   config.vm.synced_folder "./www", "/var/www/html", id: "vagrant-www",
     owner: "www-data",
     group: "www-data",
-    mount_options: ["dmode=770,fmode=664"]
+    mount_options: ["dmode=777,fmode=776"]
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs

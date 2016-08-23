@@ -35,3 +35,5 @@ mysql -u $MYSQL_ROOT_USER -p$MYSQL_ROOT_PASS -e "grant all on $MYSQL_USER_NAME.*
 cd $WEBSERVER_ROOT
 ocdev ci mysql
 
+# Change Data-Directory
+sed -i 's/.*datadirectory.*/"datadirectory" => "\/var\/www\/data",/g' /vagrant/www/config/config.php
