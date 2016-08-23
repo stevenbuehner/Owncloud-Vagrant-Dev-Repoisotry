@@ -16,6 +16,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, path: "vagrant_scripts/increase_swap.sh"
   config.vm.provision :shell, path: "vagrant_scripts/install_mysql.sh", env: {"MYSQL_ROOT_PASS" => "adminpass", "MYSQL_ROOT_USER" => "root"}
   config.vm.provision :shell, path: "vagrant_scripts/install_apache2_php5.6.sh"
+  config.vm.provision :shell, path: "vagrant_scripts/install_xdebug_remote.sh"
   config.vm.provision :shell, path: "vagrant_scripts/install_composer.sh"
   config.vm.provision :shell, path: "vagrant_scripts/install_phpunit.sh"
   config.vm.provision :shell, path: "vagrant_scripts/install_owncloud.sh", env: {"MYSQL_ROOT_PASS" => "adminpass", "OWNCLOUD_BRANCH" => "stable9"}
