@@ -37,3 +37,8 @@ ocdev ci mysql
 
 # Change Data-Directory
 sed -i 's/.*datadirectory.*/"datadirectory" => "\/var\/www\/data",/g' /vagrant/www/config/config.php
+
+# Enable my app
+cd /vagrant/www
+sudo -u vagrant ./occ app:enable knowledgebase
+
