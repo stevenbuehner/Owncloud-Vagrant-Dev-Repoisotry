@@ -36,7 +36,15 @@ cd $WEBSERVER_ROOT
 ocdev ci mysql
 
 # Change Data-Directory
-sed -i 's/.*datadirectory.*/"datadirectory" => "\/var\/www\/data",/g' /vagrant/www/config/config.php
+sed -i 's/.*datadirectory.*/"datadirectory" => "\/var\/www\/data",/g' "$WEBSERVER_ROOT/config/config.php"
+
+# Enable Debug-Mode
+if grep -q 'debug' "$WEBSERVER_ROOT/config/config.php"; then
+    echo "Debug is already enabled"
+else
+	echo "Enable Debug-Mode"
+	sed -i 's/);/  "debug" => true, \n);/' /var/www/html/config/config.php
+fi
 
 # Enable my app
 cd /vagrant/www
