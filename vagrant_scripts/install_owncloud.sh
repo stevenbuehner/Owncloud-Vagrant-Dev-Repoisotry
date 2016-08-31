@@ -46,6 +46,9 @@ else
 	sed -i 's/);/  "debug" => true, \n);/' /var/www/html/config/config.php
 fi
 
+# Install tools for Translation
+apt-get install -y liblocale-po-perl gettext
+
 # Enable my app
 cd /vagrant/www
 sudo -u vagrant ./occ app:enable knowledgebase
