@@ -9,6 +9,11 @@ if [ -z ${OWNCLOUD_BRANCH+x} ]; then OWNCLOUD_BRANCH=stable9; else echo "Overrid
 if [ -z ${WEBSERVER_ROOT+x} ]; then WEBSERVER_ROOT=/var/www/html; else echo "Override WEBSERVER_ROOT='$WEBSERVER_ROOT'."; fi
 
 
+echo "--------- --------- --------- --------- ---------"
+echo "--------- -- Installing Owncloud now -- ---------"
+echo "--------- --------- --------- --------- ---------"
+
+
 # install Owncloud requirements
 apt-get install -y git python3 python3-pip python3-jinja2
 apt-get install rsync
@@ -43,7 +48,16 @@ if grep -q 'debug' "$WEBSERVER_ROOT/config/config.php"; then
     echo "Debug is already enabled"
 else
 	echo "Enable Debug-Mode"
-	sed -i 's/);/  "debug" => true, \n);/' /var/www/html/config/config.php
+	sed -i 's/);/  "debug" => true, \n);/' "$WEBSERVER_ROOT/config/config.php"
+fi
+
+# Set Log-Level to INFO
+# 0=DEBUG, 1=INFO, 2=WARN, 3=ERROR (default is WARN)
+if grep -q 'loglevel' "$WEBSERVER_ROOT/config/config.php"; then
+    echo "Loglevel has already ben defined"
+else
+	echo "Set Log-Level to 1 (INFO)"
+	sed -i 's/);/  "loglevel" => 1, \n);/' "$WEBSERVER_ROOT/config/config.php"
 fi
 
 # Install tools for Translation
