@@ -22,3 +22,8 @@ apt-get install -y php5
 apt-get install -y php5-imagick mysql-server php5-mysql php5-mcrypt php5-curl php5-imap php5-gd php5-sqlite
 php5 -v
 
+# Disable the Automatically populating $HTTP_RAW_POST_DATA (will be in future anyway)
+sed -i 's/;\s*always_populate_raw_post_data/always_populate_raw_post_data/' "/etc/php5/apache2/php.ini"
+
+# Reload Apache (with changed php.ini)
+service apache2 reload
