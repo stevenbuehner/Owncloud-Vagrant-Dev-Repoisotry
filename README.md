@@ -5,10 +5,13 @@ I wanted to see exactly what is installed on the vm and therefore created my own
 # Usage Advantages
 - Owncloud is completely setup with current branch "stable9"
 - Owncloud will run on http://localhost:5000
-- MySql DB accessible with external apps (Sequel Pro, ...) at localhost:5001 with username "root" and password "adminpass
+- MySql DB accessible with external apps (Sequel Pro, ...) at localhost:5001 with username "root" and password "adminpass"
 - /var/www/html has user:group permissions of www-data:www-data
 - all the data can be modified on the host in "./www" or the vm in "/vagrant/www"
-- php 5.6, phpunit, owncloud dev-tools will be installed automatically
+- php 5.6, phpunit, owncloud dev-tools, composer, ... will be installed automatically
+- Installed and setup xDebug
+- Increased SWAP
+- All features are separated in different scripts and can me turned on/off as you whish
 
 # Default Usernames / Passwords
 - SQL-DB: oc_autotest
@@ -19,8 +22,8 @@ I wanted to see exactly what is installed on the vm and therefore created my own
 - Owncloud "admin" Password: admin
 
 # Often needed commands
-vagrant up
-vagrant halt
-vagrant destroy
-vagrant ssh
-vagrant ssh -c "sudo tail -f /var/log/apache2/error.log"
+- vagrant up
+- vagrant halt
+- vagrant destroy --force
+- vagrant ssh
+- vagrant ssh -c "sudo tail -f /var/log/apache2/error.log"
