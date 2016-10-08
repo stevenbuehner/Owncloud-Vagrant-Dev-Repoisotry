@@ -20,7 +20,8 @@ apt-get install rsync
 python --version
 
 # Owncloud Dev-Tool
-pip3 install ocdev
+#pip3 install ocdev
+pip3 install https://pypi.python.org/packages/source/o/ocdev/ocdev-0.2.2.tar.gz
 ocdev --version
 
 # Owncloud base-setup
