@@ -33,9 +33,11 @@ rm -rf /tmp/owncloud
 chown -R www-data.www-data $WEBSERVER_ROOT
 
 # Data-Directory
+echo "Update config to data-directory /var/www/data"
 mkdir -p "/var/www/data"
-chown www-data.www-data "/var/www/data"
+chown -R www-data.www-data "/var/www/data"
 chmod 770 "/var/www/data"
+touch "/var/www/data/.ocdata"
 sed -i 's/.*datadirectory.*/"datadirectory" => "\/var\/www\/data",/g' "$WEBSERVER_ROOT/config/config.php"
 
 service apache2 restart
