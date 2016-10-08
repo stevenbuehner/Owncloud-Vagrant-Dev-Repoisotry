@@ -25,9 +25,11 @@ pip3 install https://pypi.python.org/packages/source/o/ocdev/ocdev-0.2.2.tar.gz
 ocdev --version
 
 # Owncloud base-setup
+echo "Downloading owncloud base ${OWNCLOUD_BRANCH}"
 mkdir -p /tmp/owncloud
 ocdev setup core --dir /tmp/owncloud/ --branch $OWNCLOUD_BRANCH --no-history
 # Only sync changed files
+echo "Sync changed owncloud files to ${WEBSERVER_ROOT}"
 rsync -arc /tmp/owncloud/ $WEBSERVER_ROOT/
 rm -rf /tmp/owncloud
 chown -R www-data.www-data $WEBSERVER_ROOT
