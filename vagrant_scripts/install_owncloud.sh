@@ -72,6 +72,5 @@ fi
 apt-get install -y liblocale-po-perl gettext
 
 # Enable my app
-cd /vagrant/www
-sudo -u vagrant ./occ app:enable knowledgebase
-
+cd /var/www/html
+sudo -u www-data ./occ app:enable knowledgebase
