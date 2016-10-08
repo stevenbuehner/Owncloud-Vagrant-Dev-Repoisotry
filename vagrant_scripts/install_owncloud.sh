@@ -30,7 +30,13 @@ ocdev setup core --dir /tmp/owncloud/ --branch $OWNCLOUD_BRANCH --no-history
 rsync -arc /tmp/owncloud/ $WEBSERVER_ROOT/
 rm -rf /tmp/owncloud
 chown -R www-data.www-data $WEBSERVER_ROOT
-# chmod 770 $WEBSERVER_ROOT/data
+
+# Data-Directory
+mkdir -p "/var/www/data"
+chown www-data.www-data "/var/www/data"
+chmod 770 "/var/www/data"
+sed -i 's/.*datadirectory.*/"datadirectory" => "\/var\/www\/data",/g' "$WEBSERVER_ROOT/config/config.php"
+
 service apache2 restart
 
 # set up mysql / Travis Default-DB
@@ -39,9 +45,6 @@ mysql -u $MYSQL_ROOT_USER -p$MYSQL_ROOT_PASS -e "CREATE USER '$MYSQL_USER_NAME'@
 mysql -u $MYSQL_ROOT_USER -p$MYSQL_ROOT_PASS -e "grant all on $MYSQL_USER_NAME.* to '$MYSQL_DB'@'localhost';"
 cd $WEBSERVER_ROOT
 ocdev ci mysql
-
-# Change Data-Directory
-sed -i 's/.*datadirectory.*/"datadirectory" => "\/var\/www\/data",/g' "$WEBSERVER_ROOT/config/config.php"
 
 # Enable Debug-Mode
 if grep -q 'debug' "$WEBSERVER_ROOT/config/config.php"; then

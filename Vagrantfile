@@ -28,11 +28,12 @@ Vagrant.configure("2") do |config|
   # Default share
   config.vm.synced_folder ".", "/vagrant", id: "vagrant-root"
   
-    # Sync www to /var/www/html with special owner and group
-  config.vm.synced_folder "./data", "/var/www/data", id: "vagrant-data",
-    owner: "vagrant",
-    group: "www-data",
-    mount_options: ["dmode=770,fmode=660"]
+# Sync www to /var/www/html with special owner and group
+# create conflict on a mac (when using special umlaute "ä", "ö", "ü", ...) and the owncloud-core scanner is involved
+#  config.vm.synced_folder "./data", "/var/www/data", id: "vagrant-data",
+#    owner: "vagrant",
+#    group: "www-data",
+#    mount_options: ["dmode=770,fmode=660"]
   
   # Sync www to /var/www/html with special owner and group
   config.vm.synced_folder "./www", "/var/www/html", id: "vagrant-www",
